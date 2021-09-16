@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageList from './imageList.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -7,7 +8,11 @@ class App extends React.Component {
 
   render () {
     return (
-      <h1>Hello from React!</h1>
+      <div className='container'>
+        <h1>Spacetagram</h1>
+        <ImageList />
+      </div>
+
     )
   }
 }
