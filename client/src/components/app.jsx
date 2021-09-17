@@ -12,6 +12,7 @@ class App extends React.Component {
     }
 
     this.imageLiked = this.imageLiked.bind(this);
+    this.unlikeImage = this.unlikeImage.bind(this);
   }
 
   componentDidMount () {
@@ -37,11 +38,21 @@ class App extends React.Component {
     localStorage.setItem('favSpacePics', JSON.stringify(likedImages));
   }
 
+  unlikeImage (imageTitle) {
+    const likedImages = localStorage.favSpacePics ? JSON.parse(localStorage.favSpacePics) : [];
+    const imageIndex = likedImages.indexOf(imageTitle);
+
+    likedImages.splice(imageIndex, 1);
+
+    this.setState({likedPhotos: likedImages});
+    localStorage.setItem('favSpacePics', JSON.stringify(likedImages));
+  }
+
   render () {
     return (
       <div className='container'>
         <h1>Spacetagram</h1>
-        <ImageList images={this.state.images} liked={this.state.likedPhotos} imageLiked={this.imageLiked}/>
+        <ImageList images={this.state.images} liked={this.state.likedPhotos} imageLiked={this.imageLiked}  unlikeImage={this.unlikeImage} />
       </div>
 
     )
