@@ -1,0 +1,24 @@
+.container {
+  border: 3px solid aqua;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 5%;
+}
+
+.listContainer {
+  border: 3px solid pink;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3%;
+}
+
+.cardContainer {
+  border: 3px solid green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2% 0;
+}
