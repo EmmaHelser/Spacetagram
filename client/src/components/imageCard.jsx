@@ -2,13 +2,13 @@ import React from 'react';
 
 function ImageCard (props) {
   return (
-    <div className='container'>
-      <h2>Image: {props.image.image}</h2>
-      <h3>Image Title: {props.image.title}</h3>
-      <p>Description: {props.image.description}</p>
+    <div className='cardContainer'>
+      <img src={props.image.url}></img>
+      <h3>{props.image.title}</h3>
+      <p>{props.image.explanation}</p>
       <div>
-        <h4>Date: {props.image.date}</h4>
-        <h4>Like: {props.image.liked}</h4>
+        <h4>{props.image.date}</h4>
+        <h4>{props.liked === true ? 'liked' : 'not liked'}</h4>
       </div>
     </div>
   )
