@@ -22,3 +22,9 @@
   align-items: center;
   margin: 2% 0;
 }
+
+.dateAndLiked {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
