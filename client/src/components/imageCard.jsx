@@ -10,7 +10,7 @@ function ImageCard (props) {
         <h4>{props.image.date}</h4>
         {props.liked === true ?
         <h4>&#10084;</h4> :
-        <h4>&#9825;</h4>
+        <h4 onClick={() => {props.imageLiked(props.image.title)}}>&#9825;</h4>
         }
       </div>
     </div>

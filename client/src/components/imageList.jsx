@@ -6,7 +6,7 @@ function ImageList (props) {
     <div className='listContainer'>
       <h2>List of images</h2>
       <ul>
-        {props.images.map((photo, index) => <ImageCard image={photo} key={index} liked={props.liked.includes(photo.title)}/> )}
+        {props.images.map((photo, index) => <ImageCard image={photo} key={index} liked={props.liked.includes(photo.title)} imageLiked={props.imageLiked}/> )}
       </ul>
     </div>
   )

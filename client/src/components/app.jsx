@@ -10,11 +10,13 @@ class App extends React.Component {
       images: [],
       likedPhotos: []
     }
+
+    this.imageLiked = this.imageLiked.bind(this);
   }
 
   componentDidMount () {
 
-    const likedPhotos = localStorage.favSpacePcs ? JSON.parse(localStorage.faveSpacePics) : this.state.likedPhotos;
+    const likedPhotos = localStorage.favSpacePics ? JSON.parse(localStorage.favSpacePics) : this.state.likedPhotos;
 
     axios.get(`https://api.nasa.gov/planetary/apod?api_key=${token.token}&count=10`)
       .then((response) => {
@@ -26,11 +28,20 @@ class App extends React.Component {
       })
   }
 
+  imageLiked (imageTitle) {
+    const likedImages = localStorage.favSpacePics ? JSON.parse(localStorage.favSpacePics) : [];
+
+    likedImages.push(imageTitle);
+
+    this.setState({likedPhotos: likedImages});
+    localStorage.setItem('favSpacePics', JSON.stringify(likedImages));
+  }
+
   render () {
     return (
       <div className='container'>
         <h1>Spacetagram</h1>
-        <ImageList images={this.state.images} liked={this.state.likedPhotos} />
+        <ImageList images={this.state.images} liked={this.state.likedPhotos} imageLiked={this.imageLiked}/>
       </div>
 
     )
