@@ -18,8 +18,8 @@ class App extends React.Component {
   componentDidMount () {
     const date = new Date();
     const currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
-    const pastDate = `${date.getFullYear()}-${date.getMonth() - 1}-${date.getDay()}`;
-    console.log(currentDate, pastDate);
+    const pastDate = date.getDay() - 15 > 0 ? `${date.getFullYear()}-${date.getMonth()}-${date.getDay() - 15}` : `${date.getFullYear()}-${date.getMonth() - 1}-${20}`;
+    const pastDateThirty = `${date.getFullYear()}-${date.getMonth() - 1}-${date.getDay()}`;
     const likedPhotos = localStorage.favSpacePics ? JSON.parse(localStorage.favSpacePics) : this.state.likedPhotos;
 
     axios.get(`https://api.nasa.gov/planetary/apod?api_key=${token.token}&start_date=${pastDate}&end_date=${currentDate}`)
