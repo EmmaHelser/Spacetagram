@@ -1,38 +1,35 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ImageList from './imageList.jsx';
 import token from '../../../token.js';
 import axios from 'axios';
 
-class App extends React.Component {
-  constructor (props) {
-    super (props);
-    this.state = {
-      images: null,
-      likedPhotos: []
-    }
+function App (props) {
+  const [images, setImages] = useState(null);
+  const [likedPhotos, setLikedPhotos] = useState([]);
 
-    this.imageLiked = this.imageLiked.bind(this);
-    this.unlikeImage = this.unlikeImage.bind(this);
-  }
-
-  componentDidMount () {
+  useEffect(() => {
     const date = new Date();
     const currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
     const pastDate = date.getDay() - 15 > 0 ? `${date.getFullYear()}-${date.getMonth()}-${date.getDay() - 15}` : `${date.getFullYear()}-${date.getMonth() - 1}-${20}`;
-    const pastDateThirty = `${date.getFullYear()}-${date.getMonth() - 1}-${date.getDay()}`;
-    const likedPhotos = localStorage.favSpacePics ? JSON.parse(localStorage.favSpacePics) : this.state.likedPhotos;
+    const likedPhotos = localStorage.favSpacePics ? JSON.parse(localStorage.favSpacePics) : likedPhotos;
 
     axios.get(`https://api.nasa.gov/planetary/apod?api_key=${token.token}&start_date=${pastDate}&end_date=${currentDate}`)
       .then((response) => {
         let images = response.data.reverse();
-        this.setState({images: images, likedPhotos: likedPhotos});
+        setImages(images);
+        setLikedPhotos(likedPhotos);
       })
       .catch((err) => {
         console.log(err);
       })
-  }
+  }, []);
 
-  imageLiked (imageTitle) {
+  useEffect(() => {
+    const date = new Date();
+    const currentDate = date.getDay() - 15 > 0 ? `${date.getFullYear()}-${date.getMonth()}-${date.getDay() - 15}` : `${date.getFullYear()}-${date.getMonth() - 1}-${20}`;
+  }, [images]);
+
+  const imageLiked = (imageTitle) => {
     const likedImages = localStorage.favSpacePics ? JSON.parse(localStorage.favSpacePics) : [];
 
     likedImages.push(imageTitle);
@@ -41,7 +38,7 @@ class App extends React.Component {
     localStorage.setItem('favSpacePics', JSON.stringify(likedImages));
   }
 
-  unlikeImage (imageTitle) {
+  const unlikeImage = (imageTitle) => {
     const likedImages = localStorage.favSpacePics ? JSON.parse(localStorage.favSpacePics) : [];
     const imageIndex = likedImages.indexOf(imageTitle);
 
@@ -51,8 +48,7 @@ class App extends React.Component {
     localStorage.setItem('favSpacePics', JSON.stringify(likedImages));
   }
 
-  render () {
-    if (this.state.images === null) {
+    if (images === null) {
       return (
         <div className='container'>
           <div className="lds-dual-ring"></div>
@@ -63,11 +59,10 @@ class App extends React.Component {
       return (
         <div className='container'>
           <h1 className='appName' alt='Spacetagram'>Spacetagram</h1>
-          <ImageList images={this.state.images} liked={this.state.likedPhotos} imageLiked={this.imageLiked}  unlikeImage={this.unlikeImage} />
+          <ImageList images={images} liked={likedPhotos} imageLiked={imageLiked}  unlikeImage={unlikeImage} />
         </div>
       )
     }
-  }
 }
 
 export default App;
