@@ -8,6 +8,7 @@ html {
   align-items: center;
   flex-direction: column;
   padding: 5%;
+  font-family: 'Mitr', sans-serif;
 }
 
 .listContainer {
@@ -29,6 +30,8 @@ html {
 
 .appName {
   color: white;
+  font-weight: 700;
+  font-size: 500%;
 }
 
 .dateAndLiked {
@@ -42,7 +45,7 @@ html {
 
 .imageTitle {
   color: white;
-  font-size: 140%;
+  font-size: 150%;
 }
 
 .imageDescription {
