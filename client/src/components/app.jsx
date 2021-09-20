@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      images: [],
+      images: null,
       likedPhotos: []
     }
 
@@ -24,8 +24,8 @@ class App extends React.Component {
 
     axios.get(`https://api.nasa.gov/planetary/apod?api_key=${token.token}&start_date=${pastDate}&end_date=${currentDate}`)
       .then((response) => {
-        console.log(response.data);
-        this.setState({images: response.data, likedPhotos: likedPhotos});
+        let images = response.data.reverse();
+        this.setState({images: images, likedPhotos: likedPhotos});
       })
       .catch((err) => {
         console.log(err);
@@ -52,13 +52,21 @@ class App extends React.Component {
   }
 
   render () {
-    return (
-      <div className='container'>
-        <h1>Spacetagram</h1>
-        <ImageList images={this.state.images} liked={this.state.likedPhotos} imageLiked={this.imageLiked}  unlikeImage={this.unlikeImage} />
-      </div>
-
-    )
+    if (this.state.images === null) {
+      return (
+        <div className='container'>
+          <div className="lds-dual-ring"></div>
+          <h1 className='appName' alt='Loading...'>Loading...</h1>
+        </div>
+      )
+    } else {
+      return (
+        <div className='container'>
+          <h1 className='appName' alt='Spacetagram'>Spacetagram</h1>
+          <ImageList images={this.state.images} liked={this.state.likedPhotos} imageLiked={this.imageLiked}  unlikeImage={this.unlikeImage} />
+        </div>
+      )
+    }
   }
 }
 
