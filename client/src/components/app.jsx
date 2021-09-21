@@ -53,22 +53,27 @@ function App (props) {
     }
   }, [imageOfDay]);
 
-  const imageLiked = (imageTitle) => {
+  const imageLiked = (imageTitle, index) => {
     const likedImages = localStorage.favSpacePics ? JSON.parse(localStorage.favSpacePics) : [];
+    let allImages = images.slice();
 
+    allImages[Number.parseInt(index)].liked = true;
     likedImages.push(imageTitle);
 
-    this.setState({likedPhotos: likedImages});
+    setLikedPhotos(likedImages);
+    setImages(allImages)
     localStorage.setItem('favSpacePics', JSON.stringify(likedImages));
   }
 
-  const unlikeImage = (imageTitle) => {
+  const unlikeImage = (imageTitle, index) => {
     const likedImages = localStorage.favSpacePics ? JSON.parse(localStorage.favSpacePics) : [];
-    const imageIndex = likedImages.indexOf(imageTitle);
+    let allImages = images.slice();
 
-    likedImages.splice(imageIndex, 1);
+    allImages[Number.parseInt(index)].liked = false;
+    likedImages.splice(Number.parseInt(index), 1);
 
-    this.setState({likedPhotos: likedImages});
+    setLikedPhotos(likedImages);
+    setImages(allImages);
     localStorage.setItem('favSpacePics', JSON.stringify(likedImages));
   }
 

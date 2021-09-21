@@ -9,8 +9,14 @@ function ImageCard (props) {
       <div className='dateAndLiked'>
         <h3 className='date' alt={`Date taken: ${props.image.date}`}>{props.image.date}</h3>
         {props.image.liked === true ?
-        <h3 className='liked' onClick={() => {props.unlikeImage(props.image.title)}} alt='Image liked'>&#10084;</h3> :
-        <h3 className='liked' onClick={() => {props.imageLiked(props.image.title)}} alt='Image not liked'>&#9825;</h3>
+        <h3 className='liked' onClick={() => {
+          props.unlikeImage(props.image.title, props.index);
+          props.image.liked = false;
+        }} alt='Image liked'>&#10084;</h3> :
+        <h3 className='liked' onClick={() => {
+          props.imageLiked(props.image.title, props.index);
+          props.image.liked = true;
+        }} alt='Image not liked'>&#9825;</h3>
         }
       </div>
     </div>
