@@ -9,6 +9,7 @@ html {
   flex-direction: column;
   padding: 5%;
   font-family: 'Mitr', sans-serif;
+  color: white;
 }
 
 .listContainer {
@@ -29,9 +30,14 @@ html {
 }
 
 .appName {
-  color: white;
   font-weight: 700;
   font-size: 500%;
+  margin-bottom: 0;
+}
+
+.credit {
+  margin-top: 0;
+  opacity: 50%;
 }
 
 .dateAndLiked {
@@ -39,17 +45,19 @@ html {
   flex-direction: row;
   justify-content: space-between;
   width: 85%;
-  color: white;
   font-size: 120%;
 }
 
+.imageOfTheDay {
+  font-size: 250%;
+  text-decoration: white underline;
+}
+
 .imageTitle {
-  color: white;
   font-size: 150%;
 }
 
 .imageDescription {
-  color: white;
   width: 85%;
   font-size: 130%;
 }
