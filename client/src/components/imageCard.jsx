@@ -8,7 +8,7 @@ function ImageCard (props) {
       <p className='imageDescription' alt={`${props.image.explanation}`}>{props.image.explanation}</p>
       <div className='dateAndLiked'>
         <h3 className='date' alt={`Date taken: ${props.image.date}`}>{props.image.date}</h3>
-        {props.liked === true ?
+        {props.image.liked === true ?
         <h3 className='liked' onClick={() => {props.unlikeImage(props.image.title)}} alt='Image liked'>&#10084;</h3> :
         <h3 className='liked' onClick={() => {props.imageLiked(props.image.title)}} alt='Image not liked'>&#9825;</h3>
         }
